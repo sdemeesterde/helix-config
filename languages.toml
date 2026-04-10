@@ -1,0 +1,50 @@
+[[language]]
+name = "rust"
+
+[language.debugger]
+name = "codelldb"
+transport = "tcp"
+command = "codelldb"
+port-arg = "--port {}"
+
+[[language.debugger.templates]]
+name = "binary"
+request = "launch"
+
+[[language.debugger.templates.completion]]
+name = "binary"
+completion = "filename"
+
+[language.debugger.templates.args]
+program = "{0}"
+runInTerminal = true
+
+[language-server.rust-analyzer.config.check]
+command = "clippy"
+
+[[language]]
+name = "css"
+formatter = { command = 'prettier', args = ["--parser", "css"] }
+
+[[language]]
+name = "typescript"
+formatter = { command = "prettier", args = ["--parser", "typescript"] }
+auto-format = true
+
+[[language]]
+name = "tsx"
+formatter = { command = 'prettier', args = ["--parser", "typescript"] }
+auto-format = true
+
+[language-server.typescript-language-server]
+command = "typescript-language-server"
+
+[[language]]
+name = "toml"
+formatter = { command = "taplo", args = ["fmt", "-"] }
+language-servers = ["taplo"]
+auto-format = true
+
+[language-server.taplo]
+command = "taplo"
+args = ["lsp", "stdio"]
