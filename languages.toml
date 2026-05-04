@@ -48,3 +48,36 @@ auto-format = true
 [language-server.taplo]
 command = "taplo"
 args = ["lsp", "stdio"]
+
+[language-server.pyright]
+command = "pyright-langserver"
+args = ["--stdio"]
+
+[language-server.pyright.config.python.analysis]
+typeCheckingMode = "basic"
+
+[language-server.ruff]
+command = "ruff"
+args = ["server"]
+
+[[language]]
+name = "python"
+language-servers = [
+  { name = "ruff", only-features = [
+    "diagnostics",
+    "format",
+    "code-action",
+  ] },
+  { name = "pyright", except-features = [
+    "diagnostics",
+    "format",
+    "code-action",
+  ] },
+]
+auto-format = true
+formatter = { command = "ruff", args = [
+  "format",
+  "--stdin-filename",
+  "%{buffer_name}",
+  "-",
+] }
